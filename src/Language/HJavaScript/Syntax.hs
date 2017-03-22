@@ -215,7 +215,7 @@ class Show a => IsFeature a where
   showsFeature :: a -> ShowS
 
 -- A class can be a feature
-instance IsClass c => IsFeature c where
+instance (Show c, IsClass c) => IsFeature c where
   showsFeature = shows
   
 
@@ -504,7 +504,7 @@ class (IsClass c, Args e t) => HasConstructor c e t
 class Show r => IsDeref r
 
 -- There are two kinds of dereferencing; either from classes or objects.
-instance IsClass c  => IsDeref c
+instance (Show c, IsClass c) => IsDeref c
 instance IsClass c  => IsDeref (Exp c)
 
 -------------------------------------------------------------------
